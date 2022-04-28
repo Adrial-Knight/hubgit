@@ -1,0 +1,50 @@
+body {
+    background-color: #0c476a;
+}
+
+h1 {
+    color: white;
+    font-size: 400%;
+    margin-left: 20px;
+}
+
+th {
+    width: 60px;
+    border-width: 2px;
+    border-color: white;
+    border: solid;
+    font-family: sans-serif;
+}
+
+#gameGrid {
+    color: white;
+    font-size: 300%;
+}
+
+.empty {
+    color: transparent;
+}
+
+.ingame {
+    background-color: #0284c7;
+    color: white;
+}
+
+.visible {
+    background-color: transparent;
+}
+
+.present {
+    border-radius: 50%;
+    background-color: #eab308;
+}
+
+.found {
+    background-color: #ef4444;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
