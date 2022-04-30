@@ -1,0 +1,7 @@
+Améliorations en vrac:
+Trouver un dictionnaire de 2, 3, 4, ... lettres et adapter le code en conséquence (recherches moins longues)
+Ajouter un clavier virtuel
+Améliorer l'interface de fin de jeu
+Animer les lettres lors de la saisie
+Bouton "nouvelle partie" => actualiser le compteur de parties (ne pas recharger la page)
+Proposer un mot du jour (secret = dico[f(date)])

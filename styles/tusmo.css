@@ -63,7 +63,7 @@ th {
 #game-header {
     color: white;
     font-size: 400%;
-    margin-left: 20px;
+    text-align: center;
 }
 
 #game-subheader-wrapper {
@@ -75,15 +75,17 @@ th {
 
 #game-subheader-left {
     float: left;
-    width: 40%;
+    width: 30%;
+    margin-left: 10%;
     margin-right: 10%;
     text-align: right;
 }
 
 #game-subheader-right {
     float: left;
-    width: 40%;
+    width: 30%;
     margin-left: 10%;
+    margin-right: 10%;
     text-align: left;
 }
 
