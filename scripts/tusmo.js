@@ -2,30 +2,32 @@ import {Line} from "./Line.js"
 import {Game} from "./Game.js"
 
 var game = new Game()
-var line = game.init()
-tusmoKeyboardHandler(5)
+var line = game.init(6)
+tusmoKeyboardHandler()
 
-function tusmoKeyboardHandler(chance){
+function tusmoKeyboardHandler(){
     var status = undefined
     const hint = line.getHintList()
     var handler
     document.addEventListener("keydown", handler = function(event) {
-        if (event.key === "Enter" && chance) {
+        if (event.key === "Enter" && game.isRunning()) {
             if (game.allow(line.getCache())){
                 status = game.analyse(line.getCache())
                 line.refresh(status)
                 if (allAreEqual(status)){
                     document.removeEventListener("keydown", handler)
                     game.win()
-                    chance = 0
                 }
                 else{
-                    chance--
-                    if(chance){
+                    game.useAChance()
+                    if(game.isRunning()){
                         line = new Line(line.getFirstLetter(), line.getLenght())
                         line.refresh([])
                     }
                 }
+            }
+            else {
+                line.deleteCache()
             }
         }
         else if (event.key === "Delete" || event.key === "Backspace"){
@@ -34,11 +36,11 @@ function tusmoKeyboardHandler(chance){
         else if (isLetter(event.key)){
             line.push(event.key)
         }
-        if (!allAreEqual(status) && !chance){
+        if (!allAreEqual(status) && !game.isRunning()){
             document.removeEventListener("keydown", handler)
             game.over()
         }
-        else if (chance){
+        else if (game.isRunning()){
             const analyse = Array(line.getCache().length).fill(hint.ingame)
             line.refresh(analyse)
         }

@@ -4,11 +4,14 @@ export class Game {
     constructor() {
         this.secret = undefined
         this.dico = getDico()
+        this.gameCounter = 1
     }
-    init() {
+    init(chance) {
         this.secret = pickSecretFromDico(this.dico)
+        this.chance = chance
         var line = new Line(this.secret[0], this.secret.length)
         this.hint = line.getHintList()
+        this.resfreshHeader()
         line.refresh([])
         return line
     }
@@ -32,10 +35,23 @@ export class Game {
         }
         return status
     }
+    useAChance() {
+        this.chance--
+    }
+    isRunning() {
+        return this.chance > 0
+    }
+    resfreshHeader() {
+        var counterHTML = document.getElementById("game-subheader-left")
+        var lenghtHTML = document.getElementById("game-subheader-right")
+        counterHTML.innerHTML = "Mot " + this.gameCounter
+        lenghtHTML.innerHTML = this.secret.length + " lettres"
+    }
     over() {
         alert("Perdu !\nLe mot à trouver était " + this.secret)
     }
     win() {
+        this.chance = 0
         alert("Gagné !")
     }
 }

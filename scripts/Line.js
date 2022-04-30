@@ -34,6 +34,9 @@ export class Line {
     getCache() {
         return this.cache
     }
+    deleteCache() {
+        this.cache = this.cache[0]
+    }
     getFirstLetter() {
         return this.cache[0]
     }
@@ -46,7 +49,7 @@ export class Line {
 }
 
 function insertInHTML(length, unsetChar){
-    var grid = document.getElementById("gameGrid")
+    var grid = document.getElementById("game-grid")
     var id = 0
     if (grid.childNodes[0]){
         id = grid.childNodes[0].childElementCount

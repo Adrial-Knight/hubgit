@@ -7,8 +7,23 @@
         <title>TUSMO</title>
     </head>
     <body>
-        <h1 class="center-content">TUSMO</h1>
-        <table class="center-content" id="gameGrid"></table>
+        <div id="wrapper">
+            <div id="left"></div>
+            <div id="center">
+                <div id="game-wrapper">
+                    <div id="game-header">TUSMO</div>
+                    <div id="game-subheader-wrapper">
+                        <div id="game-subheader-left"></div>
+                        <div id="game-subheader-right"></div>
+                    </div>
+                    <table id="game-grid"></table>
+                    <div id="game-keyboard">
+                        <h5>Le clavier (bientôt)</h5>
+                    </div>
+                </div>
+            </div>
+            <div id="right"></div>
+        </div>
         <script type="module" src="scripts/tusmo.js"></script>
     </body>
 </html>
