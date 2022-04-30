@@ -21,7 +21,7 @@ th {
     font-size: 300%;
 }
 
-.empty {
+.undefined {
     color: transparent;
 }
 
@@ -30,7 +30,7 @@ th {
     color: white;
 }
 
-.visible {
+.visible, .absent {
     background-color: transparent;
 }
 
