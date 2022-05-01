@@ -1,8 +1,13 @@
 import {Line} from "./Line.js"
 import {Game} from "./Game.js"
 
-var game = new Game()
-var line = game.init(6)
+var game = undefined
+
+await fetch("data/dico.json")
+        .then(response => response.json())
+        .then(dico => game = new Game(dico))
+
+var line = game.init(5, 6)
 tusmoKeyboardHandler()
 
 function tusmoKeyboardHandler(){

@@ -1,5 +1,4 @@
 Améliorations en vrac:
-Trouver un dictionnaire de 2, 3, 4, ... lettres et adapter le code en conséquence (recherches moins longues)
 Ajouter un clavier virtuel
 Améliorer l'interface de fin de jeu
 Animer les lettres lors de la saisie

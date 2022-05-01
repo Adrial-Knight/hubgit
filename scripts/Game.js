@@ -1,13 +1,14 @@
 import {Line} from "./Line.js"
 
 export class Game {
-    constructor() {
-        this.secret = undefined
-        this.dico = getDico()
+    constructor(globalDico) {
+        this.globalDico = globalDico
         this.gameCounter = 1
     }
-    init(chance) {
-        this.secret = pickSecretFromDico(this.dico)
+    init(length, chance) {
+        this.dico = this.globalDico[length].list
+        this.dicoLength = this.globalDico[length].len
+        this.secret = pickSecretFromDico(this.dico, this.dicoLength)
         this.chance = chance
         var line = new Line(this.secret[0], this.secret.length)
         this.hint = line.getHintList()
@@ -17,7 +18,7 @@ export class Game {
     }
     allow(guess) {
         const condLength = (guess.length == this.secret.length)
-        const exist = this.dico.includes(guess.toLowerCase())
+        const exist = this.dico.includes(guess)
         return condLength && exist
     }
     analyse(guess) {
@@ -56,13 +57,7 @@ export class Game {
     }
 }
 
-function getDico() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "data/dico.txt", false);
-    request.send(null);
-    return request.responseText.split("\n");
-}
-
-function pickSecretFromDico(dico) {
-    return dico[Math.round(Math.random() * (dico.length - 2))].toUpperCase()
+function pickSecretFromDico(dico, length) {
+    var wordId = Math.round(Math.random() * (length))
+    return dico[wordId]
 }
