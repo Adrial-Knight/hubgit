@@ -1,5 +1,4 @@
 Améliorations en vrac:
-Ajouter un clavier virtuel
 Améliorer l'interface de fin de jeu
 Animer les lettres lors de la saisie
 Bouton "nouvelle partie" => actualiser le compteur de parties (ne pas recharger la page)
