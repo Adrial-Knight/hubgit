@@ -14,7 +14,15 @@ export class Game {
         this.hint = line.getHintList()
         this.resfreshHeader()
         line.refresh([])
-        return line
+        this.currentLine = line
+    }
+    getCurrentLine() {
+        return this.currentLine
+    }
+    setNewLine() {
+        var line = new Line(this.secret[0], this.secret.length)
+        line.refresh([])
+        this.currentLine = line
     }
     allow(guess) {
         const condLength = (guess.length == this.secret.length)

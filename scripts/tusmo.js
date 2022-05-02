@@ -1,14 +1,14 @@
-import {Line} from "./Line.js"
 import {Game} from "./Game.js"
 
 var game = await fetch("data/dico.json")
         .then(response => response.json())
         .then(dico => game = new Game(dico))
-var line = undefined
+
+start(game, 6, 6)
 
 function handler(key, game) {
-    console.log(key)
     var status = undefined
+    var line = game.getCurrentLine()
     if (key === "ENTER" && game.isRunning()) {
         if (game.allow(line.getCache())){
             var status = game.analyse(line.getCache())
@@ -19,8 +19,7 @@ function handler(key, game) {
             else{
                 game.useAChance()
                 if(game.isRunning()){
-                    line = new Line(line.getFirstLetter(), line.getLenght())
-                    line.refresh([])
+                    game.setNewLine(line)
                 }
             }
         }
@@ -38,6 +37,7 @@ function handler(key, game) {
         game.over()
     }
     else if (game.isRunning()){
+        line = game.getCurrentLine()
         const hint = line.getHintList()
         const analyse = Array(line.getCache().length).fill(hint.ingame)
         line.refresh(analyse)
@@ -60,15 +60,14 @@ function allAreEqual(array) {
     return result;
 }
 
-
-line = game.init(6, 6)
-console.log(game)
-
-document.addEventListener("keydown", function(event){
-    if (game.isRunning())
+function start(game, length, chance){
+    game.init(length, chance)
+    document.addEventListener("keydown", function(event){
+        if (game.isRunning())
         handler(event.key.toUpperCase(), game)
-})
+    })
 
-document.getElementById("virtual-keyboard").addEventListener("click", function(event){
-    handler(event.target.id, game)
-})
+    document.getElementById("virtual-keyboard").addEventListener("click", function(event){
+        handler(event.target.id, game)
+    })
+}
