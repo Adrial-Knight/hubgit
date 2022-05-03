@@ -1,18 +1,21 @@
 import {Game} from "./Game.js"
+import {VirtualKeyboard} from "./VirtualKeyboad.js"
 
 var game = await fetch("data/dico.json")
         .then(response => response.json())
         .then(dico => game = new Game(dico))
 
 start(game, 6, 6)
+// console.log("Secret: " + game.secret)
 
-function handler(key, game) {
+function handler(key, game, keyboard) {
     var status = undefined
     var line = game.getCurrentLine()
     if (key === "ENTER" && game.isRunning()) {
         if (game.allow(line.getCache())){
             var status = game.analyse(line.getCache())
             line.refresh(status)
+            keyboard.refresh(status, line.getCache())
             if (allAreEqual(status)){
                 game.win()
             }
@@ -62,12 +65,13 @@ function allAreEqual(array) {
 
 function start(game, length, chance){
     game.init(length, chance)
+    var keyboard = new VirtualKeyboard(document.getElementById("virtual-keyboard-body").rows)
     document.addEventListener("keydown", function(event){
         if (game.isRunning())
-        handler(event.key.toUpperCase(), game)
+        handler(event.key.toUpperCase(), game, keyboard)
     })
 
     document.getElementById("virtual-keyboard").addEventListener("click", function(event){
-        handler(event.target.id, game)
+        handler(event.target.id, game, keyboard)
     })
 }
