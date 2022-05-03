@@ -1,5 +1,5 @@
 Améliorations en vrac:
 Améliorer l'interface de fin de jeu
 Animer les lettres lors de la saisie
-Bouton "nouvelle partie" => actualiser le compteur de parties (ne pas recharger la page)
+Ajouter un message d'erreur lorsque le mot n'est pas reconnu (pas d'alert)
 Proposer un mot du jour (secret = dico[f(date)])

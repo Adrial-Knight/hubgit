@@ -3,13 +3,15 @@ import {Line} from "./Line.js"
 export class Game {
     constructor(globalDico) {
         this.globalDico = globalDico
-        this.gameCounter = 1
+        this.score = 0
     }
-    init(length, chance) {
+    init() {
+        var length = Math.round(Math.random() * 3) + 2 + Math.min(this.score, 15)
         this.dico = this.globalDico[length].list
         this.dicoLength = this.globalDico[length].len
+        this.chance = 6
         this.secret = pickSecretFromDico(this.dico, this.dicoLength)
-        this.chance = chance
+        document.getElementById("game-grid").innerHTML = ""
         var line = new Line(this.secret[0], this.secret.length)
         this.hint = line.getHintList()
         this.resfreshHeader()
@@ -53,15 +55,18 @@ export class Game {
     resfreshHeader() {
         var counterHTML = document.getElementById("game-subheader-left")
         var lenghtHTML = document.getElementById("game-subheader-right")
-        counterHTML.innerHTML = "Mot " + this.gameCounter
+        counterHTML.innerHTML = "Score: " + this.score
         lenghtHTML.innerHTML = this.secret.length + " lettres"
     }
     over() {
-        alert("Perdu !\nLe mot à trouver était " + this.secret)
+        alert("Perdu !\nLe mot à trouver était " + this.secret + "\nScore: " + this.score)
+        this.score = 0
+        this.init()
     }
     win() {
-        this.chance = 0
         alert("Gagné !")
+        this.score++
+        this.init()
     }
 }
 

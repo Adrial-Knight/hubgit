@@ -5,8 +5,7 @@ var game = await fetch("data/dico.json")
         .then(response => response.json())
         .then(dico => game = new Game(dico))
 
-start(game, 6, 6)
-// console.log("Secret: " + game.secret)
+start(game)
 
 function handler(key, game, keyboard) {
     var status = undefined
@@ -18,6 +17,7 @@ function handler(key, game, keyboard) {
             keyboard.refresh(status, line.getCache())
             if (allAreEqual(status)){
                 game.win()
+                keyboard.restore()
             }
             else{
                 game.useAChance()
@@ -38,6 +38,7 @@ function handler(key, game, keyboard) {
     }
     if (!allAreEqual(status) && !game.isRunning()){
         game.over()
+        keyboard.restore()
     }
     else if (game.isRunning()){
         line = game.getCurrentLine()
@@ -63,8 +64,8 @@ function allAreEqual(array) {
     return result;
 }
 
-function start(game, length, chance){
-    game.init(length, chance)
+function start(game){
+    game.init()
     var keyboard = new VirtualKeyboard(document.getElementById("virtual-keyboard-body").rows)
     document.addEventListener("keydown", function(event){
         if (game.isRunning())

@@ -3,10 +3,8 @@ export class VirtualKeyboard {
         this.innerHTML = innerHTML
     }
     refresh(status, cache) {
-        console.log(status, cache)
         for (var i = 0; i < status.length; i++) {
             var className = this.letter2cell(cache[i]).className
-            console.log(className)
             if (className != "found" && status[i] == "found"){
                 this.letter2cell(cache[i]).className = "found"
             }
@@ -17,6 +15,13 @@ export class VirtualKeyboard {
                 this.letter2cell(cache[i]).className = "invisible"
             }
 
+        }
+    }
+    restore() {
+        for (var line = 0; line < 3; line++) {
+            for (var coln = 0; coln < 10; coln++) {
+                this.innerHTML[line].cells[coln].className = "visible"
+            }
         }
     }
     letter2cell(letter) {
