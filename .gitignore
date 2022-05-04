@@ -1,4 +1,6 @@
-data/abeille.txt
 debug/*
 test/*
 README.md
+data/abeille.txt
+data/pli07.txt
+data/scrabbl.json
